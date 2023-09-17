@@ -13,7 +13,7 @@ public class GewinnModel {
     private int rundenErgebnis;
 
     public GewinnModel() {
-
+        this.gesamtPunkte = 30;
     }
 
     public int getRundenErgebnis() {
@@ -46,6 +46,7 @@ public class GewinnModel {
             punkte = -10;
         }
 
+        this.rundenErgebnis = punkte;
         this.gesamtPunkte += punkte;
 
     }

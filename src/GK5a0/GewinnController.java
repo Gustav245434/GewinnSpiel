@@ -24,11 +24,11 @@ public class GewinnController {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-
-            System.out.println("Pressed Nocheinmal Button");
-
-            // Perform Tasks
-
+            view.setNochEinmalButtonEnabled(false);
+            view.setSpielerEingabeEnabled(true);
+            view.resetAktuellesErgebnis();
+            view.resetComputerZahl();
+            view.resetSpielerZahl();
 
         }
     }
@@ -38,9 +38,21 @@ public class GewinnController {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            System.out.println("Pressed Enter in SpielerEingabe TextField");
+            int spielerEingabe;
 
-            // Perform Tasks
+            try {
+                spielerEingabe = Integer.parseInt(view.getSpielerEingabe().getText());
+                view.setSpielerEingabeEnabled(false);
+                model.berechneComputerZahl();
+                model.berechneRunde(spielerEingabe);
+            } catch (NumberFormatException exception) {
+                return;
+            }
+
+            view.setPunkteGesamt(model.getGesamtPunkte());
+            view.setAktuellesErgebnis(model.getRundenErgebnis());
+            view.setComputerZahl(model.getComputerZahl());
+            view.setNochEinmalButtonEnabled(true);
 
         }
     }

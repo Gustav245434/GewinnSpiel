@@ -65,6 +65,7 @@ public class GewinnView extends JFrame {
         float f = this.spielerEingabe.getHeight();
 
         this.spielerEingabe.setFont(font.deriveFont((float) this.getHeight() - (this.getHeight() / 2)));
+        this.computerZahl.setFont(font.deriveFont((float) this.getHeight() - (this.getHeight() / 2)));
         this.spielerEingabe.setHorizontalAlignment(SwingConstants.CENTER);
         this.spielerEingabe.setOpaque(true);
         this.computerZahl.setHorizontalAlignment(SwingConstants.CENTER);
@@ -89,10 +90,41 @@ public class GewinnView extends JFrame {
     }
 
     public void setPunkteGesamt(int gesamtPunkte) {
+
+        if (gesamtPunkte >= 100) {
+            this.punkteGesamt.setText("GEWONNEN!");
+            this.punkteGesamt.setBackground(new Color(36, 255, 0));
+            return;
+        } else if (gesamtPunkte <= 0) {
+            this.punkteGesamt.setText("VERLOREN");
+            this.punkteGesamt.setBackground(new Color(255, 0, 0));
+            return;
+        }
+
         this.punkteGesamt.setText(String.valueOf(gesamtPunkte));
+
+    }
+
+    public void resetAktuellesErgebnis() {
+        this.aktuellesErgebnis.setText("");
+        this.aktuellesErgebnis.setBackground(new Color(255, 255, 255));
+    }
+    public void resetSpielerZahl() {
+        this.spielerEingabe.setText("");
+    }
+
+    public void resetComputerZahl() {
+        this.computerZahl.setText("");
     }
 
     public void setAktuellesErgebnis(int aktuellesErgebnis) {
+
+        if (aktuellesErgebnis >= 0) {
+            this.aktuellesErgebnis.setBackground(new Color(36, 255, 0));
+        } else {
+            this.aktuellesErgebnis.setBackground(new Color(255, 0, 0));
+        }
+        this.aktuellesErgebnis.setOpaque(true);
         this.aktuellesErgebnis.setText(String.valueOf(aktuellesErgebnis));
     }
 
@@ -102,6 +134,7 @@ public class GewinnView extends JFrame {
 
     public void setComputerZahl(int computerZahl) {
         this.computerZahl.setText(String.valueOf(computerZahl));
+        this.computerZahl.setDisabledTextColor(new Color(0, 0, 0));
     }
 
     public void setNochEinmalButtonEnabled(boolean enabled) {
