@@ -1,7 +1,9 @@
 package GK5a0;
 
 import javax.swing.*;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class GewinnView extends JFrame {
 
@@ -41,15 +43,32 @@ public class GewinnView extends JFrame {
         this.punkteGesamtText.setOpaque(true);
         this.aktuellesErgebnisText.setText("Aktuelles Ergebnis:");
         this.aktuellesErgebnisText.setBackground(new Color(213, 213, 213));
-        this.aktuellesErgebnisText.setHorizontalAlignment(0);
+        this.aktuellesErgebnisText.setHorizontalAlignment(SwingConstants.CENTER);
         this.aktuellesErgebnisText.setOpaque(true);
         this.punkteGesamt.setText("30");
+        this.punkteGesamt.setHorizontalAlignment(SwingConstants.CENTER);
         this.aktuellesErgebnis.setText("");
+        this.aktuellesErgebnis.setHorizontalAlignment(SwingConstants.CENTER);
         this.zahlFuerNaechsteRundeText.setText("Zahl für nächste Runde:");
+        this.zahlFuerNaechsteRundeText.setHorizontalAlignment(SwingConstants.CENTER);
+        this.zahlFuerNaechsteRundeText.setBackground(new Color(213, 213, 213));
+        this.zahlFuerNaechsteRundeText.setOpaque(true);
         this.computerZahlText.setText("Computerzahl:");
+        this.computerZahlText.setHorizontalAlignment(SwingConstants.CENTER);
+        this.computerZahlText.setBackground(new Color(213, 213, 213));
+        this.computerZahlText.setOpaque(true);
         this.computerZahl.setEnabled(false);
         this.nochEinmalButton.setText("Noch einmal!");
         this.nochEinmalButton.setEnabled(false);
+
+        Font font = this.spielerEingabe.getFont();
+        float f = this.spielerEingabe.getHeight();
+
+        this.spielerEingabe.setFont(font.deriveFont((float) this.getHeight() - (this.getHeight() / 2)));
+        this.spielerEingabe.setHorizontalAlignment(SwingConstants.CENTER);
+        this.spielerEingabe.setOpaque(true);
+        this.computerZahl.setHorizontalAlignment(SwingConstants.CENTER);
+        this.computerZahl.setOpaque(true);
 
         panelOben.add(this.punkteGesamtText);
         panelOben.add(this.aktuellesErgebnisText);
@@ -59,8 +78,12 @@ public class GewinnView extends JFrame {
         panelOben.add(this.computerZahlText);
 
         this.add(panelOben, BorderLayout.PAGE_START);
-        this.add(this.spielerEingabe, BorderLayout.LINE_START);
-        this.add(this.computerZahl, BorderLayout.LINE_END);
+
+        JPanel eingabePanel = new JPanel(new GridLayout(1, 2));
+        eingabePanel.add(spielerEingabe);
+        eingabePanel.add(computerZahl);
+
+        this.add(eingabePanel, BorderLayout.CENTER);
         this.add(this.nochEinmalButton, BorderLayout.PAGE_END);
 
     }
@@ -83,6 +106,22 @@ public class GewinnView extends JFrame {
 
     public void setNochEinmalButtonEnabled(boolean enabled) {
         this.nochEinmalButton.setEnabled(enabled);
+    }
+
+    public void setActionListenerButton(ActionListener listener) {
+        this.nochEinmalButton.addActionListener(listener);
+    }
+
+    public void setActionListenerTextField(ActionListener listener) {
+        this.spielerEingabe.addActionListener(listener);
+    }
+
+    public JButton getNochEinmalButton() {
+        return this.nochEinmalButton;
+    }
+
+    public JTextField getSpielerEingabe() {
+        return this.spielerEingabe;
     }
 
 }
