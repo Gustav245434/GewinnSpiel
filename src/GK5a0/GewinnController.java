@@ -65,18 +65,17 @@ public class GewinnController {
 
             try {
                 spielerEingabe = Integer.parseInt(view.getSpielerEingabe().getText());
-
-                if (spielerEingabe <= 0 || spielerEingabe >= 10) {
-                    return;
-                }
-
-                view.setSpielerEingabeEnabled(false);
-                model.berechneComputerZahl();
-                model.berechneRunde(spielerEingabe);
             } catch (NumberFormatException exception) {
                 return;
             }
 
+            if (spielerEingabe <= 0 || spielerEingabe >= 10) {
+                return;
+            }
+
+            view.setSpielerEingabeEnabled(false);
+            model.berechneComputerZahl();
+            model.berechneRunde(spielerEingabe);
             view.setPunkteGesamt(model.getGesamtPunkte());
             view.setAktuellesErgebnis(model.getRundenErgebnis());
             view.setComputerZahl(model.getComputerZahl());
@@ -89,6 +88,4 @@ public class GewinnController {
 
         }
     }
-
-
 }
